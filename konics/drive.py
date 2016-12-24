@@ -1,8 +1,8 @@
 import math
 
-DRIVE_SPEED = 5.0
-
 class Drive:
+    SPEED = 5.0
+
     def __init__(self, track):
         self.track = track
         self.position = (0.0, 0.0, math.pi/2.0)
@@ -17,11 +17,11 @@ class Drive:
 
     def forward(self):
         """
-        move forward by DRIVE_SPEED units
+        move forward by Drive.SPEED units
         """
         x, y, a = self.position
-        x = x + math.cos(a) * DRIVE_SPEED
-        y = y + math.sin(a) * DRIVE_SPEED
+        x = x + math.cos(a) * Drive.SPEED
+        y = y + math.sin(a) * Drive.SPEED
         self.position = (x, y, a)
 
     def rotate(self, da=0.0):

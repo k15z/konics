@@ -1,5 +1,6 @@
 import os
 import sys
+import math
 import unittest
 sys.path.insert(0, os.path.abspath('..'))
 
@@ -34,7 +35,7 @@ class TestTrack(unittest.TestCase):
 
     def test_left_cone(self):
         track = Track(size=64)
-        track.add(Cone(0, 20, 180))
+        track.add(Cone(0, 20, math.pi))
 
         image = track.render((0,0), (0,1))
         self.assertEqual(image.shape, (64, 64, 3))
@@ -43,7 +44,7 @@ class TestTrack(unittest.TestCase):
 
     def test_right_cone(self):
         track = Track(size=64)
-        track.add(Cone(0, 20, 0))
+        track.add(Cone(0, 20, 0.0))
         
         image = track.render((0,0), (0,1))
         self.assertEqual(image.shape, (64, 64, 3))

@@ -33,7 +33,7 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
 ENV PATH /opt/conda/bin:$PATH
 
 # Install konics
+WORKDIR /examples
 COPY ./konics /konics
 COPY ./examples /examples
-ENV PYTHONPATH=/:$PYTHONPATH
-WORKDIR /
+ENV PYTHONPATH /:$PYTHONPATH

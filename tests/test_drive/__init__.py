@@ -1,5 +1,6 @@
 import os
 import sys
+import math
 import unittest
 sys.path.insert(0, os.path.abspath('..'))
 
@@ -12,12 +13,12 @@ def please_check(to_check, make_sure):
 class TestDrive(unittest.TestCase):
 
     def test_0(self):
-        track = Track(size=128)
+        track = Track(size=256)
         for i in range(3):
             track.add(Cone(-10, 20*i))
             track.add(Cone( 10, 20*i))
-        track.add(Cone(-15, 40, 0))
-        track.add(Cone( 15, 40, 180))
+        track.add(Cone(-15, 40, 0.0))
+        track.add(Cone( 15, 40, math.pi))
 
         race = Drive(track)
         imsave("_output/track_0.png", race.render())

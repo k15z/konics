@@ -20,7 +20,7 @@ SKY_TEXTURES = ["Blue_Sky", "Blood_Sky", "Apocalypse", "Clouds", "FBM_Clouds", "
 GROUND_TEXTURES = ["Asphalt", "Brown_Agate", "White_Marble"]
 
 class Track:
-    def __init__(self, size=128, sky="Shadow_Clouds", ground="Asphalt"):
+    def __init__(self, size=256, sky="Shadow_Clouds", ground="Asphalt"):
         self.cones = []
         self.size = size
         self.sky = sky
@@ -87,7 +87,6 @@ class Cone:
                 }
             }"""
         else:
-            a = 2.0 * math.pi * a / 360.0
             tip_x, tip_y = x + math.cos(a)*2, y + math.sin(a)*2
             base_x, base_y = x - math.cos(a)*2, y - math.sin(a)*2
             return """cone {
