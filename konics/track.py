@@ -6,8 +6,12 @@ from io import BytesIO
 from scipy.misc import imread
 
 BINARY = "povray"
+EXTRA_FLAGS = []
 if platform.system() == "Darwin":
     BINARY = "./povray_osx"
+if platform.system() == "Windows":
+    BINARY = 'povray.exe'
+    EXTRA_FLAGS = ["+FS"]
 
 DATA_DIR = os.path.dirname(os.path.abspath(__file__)) + "/bin"
 SKY_TEXTURES = ["Blue_Sky", "Blood_Sky", "Apocalypse", "Clouds", "FBM_Clouds", "Shadow_Clouds", "Starfield"]
@@ -57,11 +61,13 @@ class Track:
             for cone in self.cones:
                 pov += cone.compile()
             fout.write(pov)
-        cmd = [BINARY, "track.pov", "+W"+str(self.size), "+H"+str(self.size), "-GA", "-o-"]
+        cmd = [BINARY, "track.pov", "+W"+str(self.size), "+H"+str(self.size), "-GA", "-o-"] + EXTRA_FLAGS
         devnull = open(os.devnull, 'w')
-        result = subprocess.check_output(cmd, cwd=DATA_DIR, stderr=devnull)
+        result = subprocess.check_output(cmd, cwd=DATA_DIR, stderr=devnull, shell=True)
         devnull.close()
-        return imread(BytesIO(result))
+        result = BytesIO(result)
+        result.seek(0)
+        return imread(result)
 
 class Cone:
     def __init__(self, x, y, a=None):

@@ -30,7 +30,9 @@ python tests.py
 ```
 
 ## compatibility
-It should work out-of-the-box on macOS if you have the scipy stack installed. Otherwise, you will 
-need to build/install POV-Ray and SciPy. Make sure the `povray` binary can be found on your PATH 
-and `konics` should work. Although `konics` should work with both Python 2.7+ and Python 3, I only
-regularly test it on Python 3 so let me know if something is broken on 2.7 and I'll take a look.
+It should work out-of-the-box on macOS and Windows 10 if you have the scipy stack installed. If you
+don't have scipy, you should install it regardless of whether you intend to use `konics` or not 
+just because it's awesome. If you are on some Linux varient, you will need to compile POV-Ray (or 
+MegaPOV) yourself and make sure the `povray` binary can be found on the PATH. Finally, although the
+simulator should work with both Python 2.7+ and Python 3, I only regularly test it on Python 3 so 
+if somethings broken, let me know and I'll take a look.
