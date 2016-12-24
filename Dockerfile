@@ -34,5 +34,6 @@ ENV PATH /opt/conda/bin:$PATH
 
 # Install konics
 COPY ./konics /konics
+COPY ./examples /
 ENV PYTHONPATH=/konics:$PYTHONPATH
 WORKDIR /
