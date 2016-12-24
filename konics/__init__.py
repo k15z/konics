@@ -6,15 +6,21 @@ from io import BytesIO
 from scipy.misc import imread
 
 BINARY = "povray"
-DATA_DIR = os.path.dirname(os.path.abspath(__file__))
-
 if platform.system() == "Darwin":
     BINARY = "./povray_osx"
 
+DATA_DIR = os.path.dirname(os.path.abspath(__file__)) + "/core"
+SKY_TEXTURES = ["Blue_Sky", "Blood_Sky", "Apocalypse", "Clouds", "FBM_Clouds", "Shadow_Clouds", "Starfield"]
+GROUND_TEXTURES = ["Asphalt", "Brown_Agate", "White_Marble"]
+
 class Track:
-    def __init__(self, size=128):
+    def __init__(self, size=128, sky="Shadow_Clouds", ground="Asphalt"):
+        assert sky in SKY_TEXTURES
+        assert ground in GROUND_TEXTURES
         self.cones = []
         self.size = size
+        self.sky = sky
+        self.ground = ground
 
     def add(self, cone):
         self.cones.append(cone)
@@ -22,9 +28,14 @@ class Track:
     def render(self, loc, at):
         with open(DATA_DIR + "/tmp.pov", "wt") as fout:
             pov = """#include "textures.inc"
+
     #declare White   = rgb 1;
     #declare Orange = color red 1 green 0.5 blue 0.0;
     #declare OrangeRed = color red 1.0 green 0.25; 
+    #declare Asphalt = texture{
+        pigment{color rgb<0.05,0.05,0.05>}
+        normal {bumps 0.75 scale 0.015}
+    }
 
     camera {
         perspective
@@ -38,13 +49,11 @@ class Track:
         <0, 100, 0> color White
     }
     sphere{<0,0,0>,1 hollow
-    texture{Shadow_Clouds}
+    texture{""" + self.sky + """}
      scale 10000
     }
     plane{ <0,1,0>, 0 
-           texture{ pigment{color rgb<0.05,0.05,0.05>}
-                    normal {bumps 0.75 scale 0.015}
-                  } // end of texture
+           texture{""" + self.ground + """}
      } // end of plane
     """
             for cone in self.cones:

@@ -14,7 +14,7 @@ and create a new Python notebook.
 
 ```
 docker pull kevz/konics:v1
-docker run -it -p 8888:8888 kevz/konics:v1 sh -c "jupyter notebook --ip='*' --port=8888 --no-browser"
+docker run -it -p 8888:8888 kevz/konics:v1 sh -c "jupyter notebook --ip='*' --no-browser"
 ```
 
 Paste the below code into your Python notebook and hit `shift-enter` to run it. After a second or 
@@ -24,7 +24,7 @@ two - we are making a ridiculously high resolution image after all - it should s
 from konics import *
 import matplotlib.pyplot as plt
 
-track = Track(size=1024) # ridiculously high-res
+track = Track(size=1024, sky="Shadow_Clouds", ground="Asphalt")
 
 for i in range(10):
     track.add(Cone(-10, 20*i))
