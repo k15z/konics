@@ -5,14 +5,14 @@ import subprocess
 from io import BytesIO
 from scipy.misc import imread
 
-BINARY = "./povray_osx"
+BINARY = "povray"
 DATA_DIR = os.path.dirname(os.path.abspath(__file__))
 
-if platform.system() != "Darwin":
-    raise RuntimeError("Sorry, I didn't bother compiling binaries for " + platform.system + ".")
+if platform.system() == "Darwin":
+    BINARY = "./povray_osx"
 
 class Track:
-    def __init__(self, size=126):
+    def __init__(self, size=128):
         self.cones = []
         self.size = size
 
