@@ -5,11 +5,13 @@ import subprocess
 from io import BytesIO
 from scipy.misc import imread
 
+SHELL = False
 BINARY = "povray"
 EXTRA_FLAGS = []
 if platform.system() == "Darwin":
     BINARY = "./povray_osx"
 if platform.system() == "Windows":
+    SHELL = True
     BINARY = 'povray.exe'
     EXTRA_FLAGS = ["+FS"]
 
@@ -63,7 +65,7 @@ class Track:
             fout.write(pov)
         cmd = [BINARY, "track.pov", "+W"+str(self.size), "+H"+str(self.size), "-GA", "-o-"] + EXTRA_FLAGS
         devnull = open(os.devnull, 'w')
-        result = subprocess.check_output(cmd, cwd=DATA_DIR, stderr=devnull, shell=True)
+        result = subprocess.check_output(cmd, cwd=DATA_DIR, stderr=devnull, shell=SHELL)
         devnull.close()
         result = BytesIO(result)
         result.seek(0)
