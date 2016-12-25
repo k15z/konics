@@ -69,3 +69,6 @@ class Track:
         result = BytesIO(result)
         result.seek(0)
         return imread(result)
+
+    def set_size(self, size):
+        self.size = size

@@ -31,8 +31,8 @@ def make_track(x_t, y_t, end_time):
         if random.random() < 0.1:
             continue
         for i in [1.0, -1.0]:
-            if len(cx) > 0 and abs(x_t(t) + i*dx - cx[-1]) < 5.0:
-                if len(cy) > 0 and abs(y_t(t) + i*dy - cy[-1]) < 5.0:
+            if len(cx) > 0 and abs(x_t(t) + i*dx - cx[-1]) < 20.0:
+                if len(cy) > 0 and abs(y_t(t) + i*dy - cy[-1]) < 20.0:
                     continue
             cx.append(x_t(t) + i*dx)
             cy.append(y_t(t) + i*dy)
