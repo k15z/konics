@@ -5,8 +5,7 @@ and rendering autocross tracks. The easiest way to try it out is to spin up a Do
 and open a Jupyter notebook - this has been tested on macOS, Windows 10, and Ubuntu 16.
 
 ![track_0.png](tests/_output/track_0.png)
-![track_1.png](tests/_output/track_1.png)
-![track_2.png](tests/_output/track_2.png)
+![parametrics.png](tests/_output/parametrics.png)
 
 ## usage
 The below commands will (1) pull the latest version of `kevz/konics` from Docker Hub and (2) start 

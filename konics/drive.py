@@ -1,7 +1,7 @@
 import math
 
 class Drive:
-    SPEED = 5.0
+    SPEED = 2.5
 
     def __init__(self, track):
         self.track = track
@@ -30,4 +30,6 @@ class Drive:
         """
         x, y, a = self.position
         a += da
+        while a < 0.0: a += math.pi*2
+        while a > math.pi*2: a -= math.pi*2
         self.position = (x, y, a)

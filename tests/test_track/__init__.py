@@ -20,33 +20,29 @@ class TestTrack(unittest.TestCase):
         self.assertEqual(track.render((0,0), (0,1)).shape, (512, 512, 3))
 
     def test_look_at(self):
-        track = Track(size=64)
+        track = Track()
         track.add(Cone(0, 20))
 
         image = track.render((0,0), (0,1))
-        self.assertEqual(image.shape, (64, 64, 3))
         imsave("_output/one_cone.png", image)
         please_check("_output/one_cone.png", "you see one cone.")
 
         image = track.render((0,0), (0,-1))
-        self.assertEqual(image.shape, (64, 64, 3))
         imsave("_output/no_cones.png", image)
         please_check("_output/no_cones.png", "you see no cones.")
 
     def test_left_cone(self):
-        track = Track(size=64)
+        track = Track()
         track.add(Cone(0, 20, math.pi))
 
         image = track.render((0,0), (0,1))
-        self.assertEqual(image.shape, (64, 64, 3))
         imsave("_output/left_cone.png", image)
         please_check("_output/left_cone.png", "the cone points left.")
 
     def test_right_cone(self):
-        track = Track(size=64)
+        track = Track()
         track.add(Cone(0, 20, 0.0))
         
         image = track.render((0,0), (0,1))
-        self.assertEqual(image.shape, (64, 64, 3))
         imsave("_output/right_cone.png", image)
         please_check("_output/right_cone.png", "the cone points right.")
