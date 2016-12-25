@@ -1,7 +1,8 @@
 import math
 import random
 import numpy as np
-from . import Track, Cone
+from random import choice
+from . import Track, Cone, SKY_TEXTURES, GROUND_TEXTURES
 
 def d(f_t, t, eps=1e-3):
     dy = f_t(t + eps) - f_t(t - eps)
@@ -14,7 +15,7 @@ def start_pos(x_t, y_t):
     return x, y, a
 
 def make_track(x_t, y_t, end_time):
-    track = Track()
+    track = Track(sky=choice(SKY_TEXTURES), ground=choice(GROUND_TEXTURES))
 
     timesteps = np.linspace(0.0, end_time, num=1000)
     x = [x_t(t) for t in timesteps]

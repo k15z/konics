@@ -4,6 +4,7 @@ the awkward javascript-electron-localhost relay and provides a simple Python API
 and rendering autocross tracks. The easiest way to try it out is to spin up a Docker container 
 and open a Jupyter notebook - this has been tested on macOS, Windows 10, and Ubuntu 16.
 
+![right_cone.png](tests/_output/right_cone.png)
 ![track_0.png](tests/_output/track_0.png)
 ![parametrics.png](tests/_output/parametrics.png)
 
@@ -12,8 +13,8 @@ The below commands will (1) pull the latest version of `kevz/konics` from Docker
 the container and launch a new Jupyter instance on port 8888.
 
 ```
-docker pull kevz/konics:v2
-docker run -it -p 8888:8888 kevz/konics:v2 sh -c "jupyter notebook --ip='*' --no-browser"
+docker pull kevz/konics:v3
+docker run -it -p 8888:8888 kevz/konics:v3 sh -c "jupyter notebook --ip='*' --no-browser"
 ```
 
 If you navigate to `http://localhost:8888` in any web browser, you should see the standard Jupyter 
