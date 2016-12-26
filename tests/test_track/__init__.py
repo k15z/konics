@@ -20,7 +20,7 @@ class TestTrack(unittest.TestCase):
         self.assertEqual(track.render((0,0), (0,1)).shape, (512, 512, 3))
 
     def test_look_at(self):
-        track = Track()
+        track = Track(sky=choice(SKY_TEXTURES), ground=choice(GROUND_TEXTURES))
         track.add(Cone(0, 20))
 
         image = track.render((0,0), (0,1))
@@ -32,7 +32,7 @@ class TestTrack(unittest.TestCase):
         please_check("_output/no_cones.png", "you see no cones.")
 
     def test_left_cone(self):
-        track = Track()
+        track = Track(sky=choice(SKY_TEXTURES), ground=choice(GROUND_TEXTURES))
         track.add(Cone(0, 20, math.pi))
 
         image = track.render((0,0), (0,1))
@@ -40,7 +40,7 @@ class TestTrack(unittest.TestCase):
         please_check("_output/left_cone.png", "the cone points left.")
 
     def test_right_cone(self):
-        track = Track()
+        track = Track(sky=choice(SKY_TEXTURES), ground=choice(GROUND_TEXTURES))
         track.add(Cone(0, 20, 0.0))
         
         image = track.render((0,0), (0,1))

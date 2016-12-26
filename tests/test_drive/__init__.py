@@ -13,7 +13,7 @@ def please_check(to_check, make_sure):
 class TestDrive(unittest.TestCase):
 
     def test_0(self):
-        track = Track()
+        track = Track(sky=choice(SKY_TEXTURES), ground=choice(GROUND_TEXTURES))
         for i in range(3):
             track.add(Cone(-10, 20*i))
             track.add(Cone( 10, 20*i))
