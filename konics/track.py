@@ -16,7 +16,7 @@ if platform.system() == "Windows":
 
 DATA_DIR = os.path.dirname(os.path.abspath(__file__)) + "/bin"
 SKY_TEXTURES = ["Blue_Sky", "Blood_Sky", "Apocalypse", "Clouds", "FBM_Clouds", "Shadow_Clouds", "Starfield"]
-GROUND_TEXTURES = ["Asphalt", "Brown_Agate", "White_Marble"]
+GROUND_TEXTURES = ["Asphalt", "White_Marble"]
 
 class Track:
     def __init__(self, size=256, sky="Shadow_Clouds", ground="Asphalt"):
