@@ -32,8 +32,18 @@ RUN echo 'export PATH=/opt/conda/bin:$PATH' > /etc/profile.d/conda.sh && \
     rm ~/anaconda.sh
 ENV PATH /opt/conda/bin:$PATH
 
+# Install things I like
+RUN mkdir /opt/conda/var/lib/
+RUN mkdir /opt/conda/var/lib/dbus/
+RUN apt-get update && apt-get install -y nano libav-tools
+RUN pip install tensorflow
+RUN pip install keras
+RUN pip install tqdm
+
 # Install konics
-WORKDIR /examples
 COPY ./konics /konics
-COPY ./examples /examples
 ENV PYTHONPATH /:$PYTHONPATH
+
+# Run.
+WORKDIR /
+CMD sh -c "jupyter notebook --ip='*' --no-browser"
