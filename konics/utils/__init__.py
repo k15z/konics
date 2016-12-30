@@ -1,7 +1,15 @@
 import numpy as np
-from ..core import World
+from .. import maps
+from ..core import *
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
+
+def make_wt(map_id):
+    item = getattr(maps, map_id)
+    world = World()
+    track = Track(item.x_t, item.y_t, item.e_t)
+    track.add_to(world)
+    return world, track
 
 def make_preview(track, world=None, title=None):
     fig = Figure()

@@ -21,40 +21,35 @@ linux-y things, just for fun. The `konics` library is on the PYTHONPATH so you s
 import it from any script.
 
 ## usage
-Now that we have the latest and greatest version of `konics`, let's expore a bit. We'll load one 
-of the 12 built-in maps and drive through it manually. Let's start by importing the map as well as 
-the core `konics` objects.
+Now that we have the latest and greatest version of `konics`, let's try importing the Drive object
+which provides a car-like interface for moving through the simulated world and the make_wt helper 
+function which makes it easy to dynamically generate a world and track from a map id.
+
+* Note: Another option is to import the World and Track objects and manually construct a world by 
+dynamically importing the map that you want. However, since dynamic imports are tricky and annoying
+to use, we provide this helper method for loading the 12 built-in maps. *
 
 ```
-from konics.maps import alfa
-from konics.core import World, Drive, Track
+from konics.core import Drive
+from konics.utils import make_wt
 ```
 
-The World object holds information about the sky, ground, and cones. If not explicitly set, the sky 
-and ground textures will be randomly chosen. The Drive object is tied to a specific world instance 
-and provides a car-like interface for moving through the world. Finally, we use the Track object to
-turn the alfa map into an autocross track with randomly generated cones and scenery.
+We make a world-track tuple from map "alfa" - see letters A-L in the NATO phonetic alphabet for the
+other map ids - and then create a Drive object for moving around in our new world. We also get the 
+pose/position at time 0 for the track and move our driver there.
+
+* Note: The time parameter as used in the parametric equations is independent of the actual time it
+takes to drive around a track. One is a mathematical convenience, the other is how you win. *
 
 ```
-world = World()
+world, track = make_wt("alfa")
 drive = Drive(world)
-
-track = Track(alfa.x_t, alfa.y_t, alfa.e_t)
-track.add_to(world)
+drive.set_pose(track.get_pose(0.0))
 ```
 
-Now let's get the initial position for this track and move our driver there. The Track provides a 
-get_pose method which computes the value and angle of the parametric functions at a given time. Be
-careful not to confuse the "time" as used by the parametric equations with the actual time it takes
-to drive through the track - these are two completely independent quantities.
-
-```
-initial_pose = track.get_pose(0.0)
-drive.set_pose(initial_pose)
-```
-
-Now that our driver is in place, we can start driving through the track. The below code alternates
-between turning slightly left and right as it drives forwards.
+Now that our world is ready and our driver is in place, we can start driving through the track. The 
+below code alternates between turning slightly left and right, driving forwards and taking pictures
+after each movement.
 
 ```
 from scipy.misc import imsave
