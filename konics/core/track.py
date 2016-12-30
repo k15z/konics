@@ -29,7 +29,7 @@ class Track:
     def add_to(self, world):
         left_cone = (0.0, 0.0)
         right_cone = (0.0, 0.0)
-        for t in np.linspace(0.0, self.e_t, num=1000):
+        for t in np.linspace(0.0, self.e_t, num=2048):
             x, y, a, dx, dy = self.get_full_pose(t)
             normal = np.cross(np.array([dx, dy, 0]), Z_HAT)
             dx, dy, _ = normal / np.linalg.norm(normal) * (VEHICLE_WIDTH / 2.0)

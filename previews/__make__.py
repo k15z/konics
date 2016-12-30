@@ -10,7 +10,6 @@ from scipy.misc import imsave
 
 for map_id in konics.maps.MAP_IDS:
     print(map_id)
-    exec("import konics.maps." + map_id)
     item = getattr(konics.maps, map_id)
 
     world = World()

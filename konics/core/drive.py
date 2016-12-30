@@ -4,7 +4,7 @@ TAU = 2*pi
 
 class Drive:
     
-    SPEED = 2.5
+    SPEED = 5.0
 
     def __init__(self, world):
         self.world = world
@@ -23,7 +23,7 @@ class Drive:
         self.pose = pose
         self._validate_pose()
 
-    def move(self, rotation):
+    def move(self, rotation=0.0):
         x, y, a = self.pose
         a += rotation
         x = x + cos(a) * Drive.SPEED
