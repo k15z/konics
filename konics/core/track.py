@@ -29,21 +29,23 @@ class Track:
     def add_to(self, world):
         left_cone = (0.0, 0.0)
         right_cone = (0.0, 0.0)
-        for t in np.linspace(0.0, self.e_t, num=2048):
+        for t in np.linspace(0.0, self.e_t, num=10000):
             x, y, a, dx, dy = self.get_full_pose(t)
             normal = np.cross(np.array([dx, dy, 0]), Z_HAT)
             dx, dy, _ = normal / np.linalg.norm(normal) * (VEHICLE_WIDTH / 2.0)
 
+            left = True
             if abs(x + dx - left_cone[0]) < CONE_DISTANCE:
                 if abs(y + dy - left_cone[1]) < CONE_DISTANCE:
-                    continue
-            if random() > P_MISSING_CONE:
+                    left = False
+            if left and random() > P_MISSING_CONE:
                 world.add_cone(x + dx, y + dy)
                 left_cone = (x + dx, y + dy)
 
+            right = True
             if abs(x - dx - right_cone[0]) < CONE_DISTANCE:
                 if abs(y - dy - right_cone[1]) < CONE_DISTANCE:
-                    continue
-            if random() > P_MISSING_CONE:
+                    right = False
+            if right and random() > P_MISSING_CONE:
                 world.add_cone(x - dx, y - dy)
                 right_cone = (x - dx, y - dy)

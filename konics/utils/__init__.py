@@ -18,7 +18,7 @@ def make_preview(track, world=None, title=None):
     canvas = FigureCanvas(fig)
     ax = fig.gca()
 
-    ts = np.linspace(0.0, track.e_t, num=1000)
+    ts = np.linspace(0.0, track.e_t, num=10000)
     x = [track.x_t(t) for t in ts]
     y = [track.y_t(t) for t in ts]
     ax.plot(x, y)
