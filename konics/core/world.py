@@ -70,7 +70,7 @@ class World:
             camera {
                 perspective
                 location <""" + str(my_x) + """, 8, """ + str(my_y) + """>
-                look_at  <""" + str(at_x) + """, 8, """ + str(at_y) + """>
+                look_at  <""" + str(at_x) + """, 7.6, """ + str(at_y) + """>
                 right x
                 up y
             }
