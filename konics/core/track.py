@@ -4,7 +4,7 @@ from random import random
 
 Z_HAT = np.array([0.0, 0.0, 1.0])
 P_MISSING_CONE = 0.1
-CONE_DISTANCE = 10.0 + random() * 5.0
+CONE_DISTANCE = 15.0 + random() * 5.0
 VEHICLE_WIDTH = 15.0 + random() * 5.0
 
 def D(f_t, t, eps=1e-3):
@@ -38,14 +38,16 @@ class Track:
             if abs(x + dx - left_cone[0]) < CONE_DISTANCE:
                 if abs(y + dy - left_cone[1]) < CONE_DISTANCE:
                     left = False
-            if left and random() > P_MISSING_CONE:
-                world.add_cone(x + dx, y + dy)
+            if left:
                 left_cone = (x + dx, y + dy)
+                if random() > P_MISSING_CONE:
+                    world.add_cone(x + dx, y + dy)
 
             right = True
             if abs(x - dx - right_cone[0]) < CONE_DISTANCE:
                 if abs(y - dy - right_cone[1]) < CONE_DISTANCE:
                     right = False
-            if right and random() > P_MISSING_CONE:
-                world.add_cone(x - dx, y - dy)
+            if right:
                 right_cone = (x - dx, y - dy)
+                if random() > P_MISSING_CONE:
+                    world.add_cone(x - dx, y - dy)
