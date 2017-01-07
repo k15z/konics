@@ -3,9 +3,9 @@ from uuid import uuid4
 from random import choice
 from math import sin, cos
 from platform import system
-from scipy.misc import imread
 from subprocess import check_output
 from os import path, remove, devnull
+from scipy.misc import imread, imresize
 
 SHELL = False
 BINARY = "povray"
@@ -48,11 +48,11 @@ class World:
         with open(DATA_DIR + "/" + fname, "wt") as fout:
             fout.write(self._compile(x, y, a))
         with open(devnull, 'w') as devout:
-            cmd = [BINARY, fname, "+W256", "+H256", "-GA", "-o-"] + EXTRA_FLAGS
+            cmd = [BINARY, fname, "+W384", "+H256", "-GA", "-o-"] + EXTRA_FLAGS
             result = BytesIO(check_output(cmd, cwd=DATA_DIR, stderr=devout, shell=SHELL))
             result.seek(0)
         remove(DATA_DIR + "/" + fname)
-        return imread(result)
+        return imresize(imread(result), (256, 256))
 
     def _compile(self, x, y, a):
         my_x, my_y = x, y
@@ -71,7 +71,7 @@ class World:
                 perspective
                 location <""" + str(my_x) + """, 8, """ + str(my_y) + """>
                 look_at  <""" + str(at_x) + """, 7.6, """ + str(at_y) + """>
-                right x
+                right x*2
                 up y
             }
             light_source {

@@ -3,8 +3,8 @@ from random import random
 from math import atan2, sqrt, pi
 
 Z_HAT = np.array([0.0, 0.0, 1.0])
-P_MISSING_CONE = 0.1
-VEHICLE_WIDTH = 5.0 + random() * 5.0
+P_MISSING_CONE = 0.2
+VEHICLE_WIDTH = 10.0 + random() * 5.0
 CONE_DISTANCE = 15.0 + random() * 5.0
 
 def D(f_t, t, eps=1e-3):
