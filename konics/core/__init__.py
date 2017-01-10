@@ -8,5 +8,6 @@ s.settimeout(0.2)
 try:
     s.connect(("localhost", 3000))
     print("Detected rendering server. Using hardware accelerated rendering engine.")
+    from .world2 import *
 except:
     print("Failed to detect rendering server. Falling back to ray-tracing renderer.")
