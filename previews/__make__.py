@@ -13,7 +13,7 @@ for map_id in MAP_IDS:
     
     world, track = make_wt(map_id)
     drive = Drive(world)
-    drive.set_pose(track.get_pose(0.0))
+    drive.set_pose(track.get_pose(0.1))
 
     imsave(MY_DIR + "/" + map_id + ".track.png", make_preview(track, world, title=map_id))
     imsave(MY_DIR + "/" + map_id + ".world.png", drive.render())
