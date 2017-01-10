@@ -5,7 +5,8 @@ Docker to ensure consistent behavior. On the other hand, if you need every bit o
 compile POV-Ray yourself and make sure the `povray` binary can be found on your PATH.
 
 Note: The new `proton` rendering engine is much, much faster than `povray`. However, it doesn't run
-on headless servers yet and is still experimental. If you want to try it out, download the app from
+on headless servers yet and is still experimental - I'm releasing it early because some people want
+to train RL agents and `povray` is far too slow. If you want to try it out, download the app from
 the experimental directory and run it - `konics` will automatically use `proton`.
 
 ## setup
