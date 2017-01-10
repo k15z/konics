@@ -4,6 +4,10 @@ Docker to ensure consistent behavior. On the other hand, if you need every bit o
 **should** work out-of-the box on macOS and Windows 10; if you use some other OS, you will need to
 compile POV-Ray yourself and make sure the `povray` binary can be found on your PATH.
 
+Note: The new `proton` rendering engine is much, much faster than `povray`. However, it doesn't run
+on headless servers yet and is still experimental. If you want to try it out, download the app from
+the experimental directory and run it - `konics` will automatically use `proton`.
+
 ## setup
 Let's break down the below commands. First we pull the latest build of konics from the Docker Hub - 
 if it says not found, that's probably because it's private and you should email me for access. Next
