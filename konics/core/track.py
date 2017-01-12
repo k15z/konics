@@ -64,8 +64,11 @@ class Track:
         x, y, a = pose
         def distance(t):
             return sqrt((self.x_t(t) - x) ** 2 + (self.y_t(t) - y) ** 2)
+
         t, d = M(distance, 0.0, self.e_t)
         _, _, aa = self.get_pose(t)
+        da = min((2 * pi) - abs(aa - a), abs(aa - a))
+
         on_track = True if d < VEHICLE_WIDTH else False
-        right_dir = True if min((2 * pi) - abs(aa - a), abs(aa - a)) < pi / 2.0 else False
-        return on_track, right_dir
+        right_dir = True if da < pi / 2.0 else False
+        return on_track, right_dir, d, da
