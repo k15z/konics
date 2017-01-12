@@ -1,3 +1,7 @@
+"""
+This example renders 1000 frames of a random map to measure the FPS. It should
+show ~8 FPS for povray (original) and ~30 FPS for proton (experimental).
+"""
 import sys
 from os import path
 from tqdm import tqdm
