@@ -7,7 +7,9 @@ compile POV-Ray yourself and make sure the `povray` binary can be found on your 
 Note: The new `proton` rendering engine is much, much faster than `povray`. However, it doesn't run
 on headless servers yet and is highly experimental. If you want to try it out, run the `proton` app
 in the experimental directory. See this [YouTube video](https://www.youtube.com/watch?v=wENubD6ItKw) 
-if you run into problems setting it up.
+if you run into problems setting it up. Note that if you are doing deep learning on the GPU, you may
+want to run this with `--blacklist-accelerated-compositing --blacklist-webgl` so it doesn't use your
+discrete GPU.
 
 ## setup
 Let's break down the below commands. First we pull the latest build of konics from the Docker Hub - 
