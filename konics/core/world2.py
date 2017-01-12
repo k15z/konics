@@ -13,8 +13,12 @@ class World:
         self.cones2.append({"x":x,"y":y})
 
     def render(self, pose):
-        url = "http://localhost:3000/"
-        pose = (pose[0], pose[1], -pose[2])
-        payload = {"cones": self.cones2, "pose": pose}
-        response = requests.post(url, json=payload)
-        return imread(BytesIO(response.content))
+        while True:
+            try:
+                url = "http://localhost:3000/"
+                pose = (pose[0], pose[1], pose[2])
+                payload = {"cones": self.cones2, "pose": pose}
+                response = requests.post(url, json=payload)
+                return imread(BytesIO(response.content))
+            except:
+                print("Warning: rendering server offline. Retrying...")

@@ -2,14 +2,28 @@
 <head>
     <title>proton</title>
     <style>
-        body { margin: 0; }
+        body { margin: 0; text-align:center; }
     </style>
 </head>
 <body>
+    <br/>
+    <h1>Proton Rendering Server</h1>
+    <div id="stats">
+        <b>Total Frames: </b>{{numFrames}}<br>
+        <b>FPS: </b>{{numFrames / (totalTime / 1000.0)}}
+    </div>
+    <br/>
+    <script src="js/vue.js"></script>
     <script src="js/three.js"></script>
-    <script src="js/Projector.js"></script>
-    <script src="js/CanvasRenderer.js"></script>
     <script>
+        var vm = new Vue({
+            el: "#stats",
+            data: {
+                numFrames: 0.0,
+                totalTime: 0.0
+            }
+        })
+
         var width = 256;
         var height = 256;
         var renderer = new THREE.WebGLRenderer();
@@ -25,7 +39,7 @@
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({ extended: true }));
         app.post("/", function (req, res) {
-            console.log(req.body);
+            var start = (new Date()).getTime()
             var scene = new THREE.Scene();
 
             var geometry = new THREE.PlaneGeometry(10000, 10000);
@@ -48,10 +62,13 @@
             var a = req.body.pose[2];
 
             var camera = new THREE.PerspectiveCamera(75, width/height, 1, 1000);
-            camera.translateX(x)
-            camera.translateZ(y)
-            camera.rotateY(a - Math.PI/2)
-            camera.translateY(8)
+            camera.position.set(x, 8, y)
+            camera.up = new THREE.Vector3(0,1,0);
+
+            var targetX = x + Math.cos(a);
+            var targetZ = y + Math.sin(a);
+            camera.lookAt(new THREE.Vector3(targetX, 7.6, targetZ));
+
             renderer.render(scene, camera);
 
             var data = renderer.domElement.toDataURL();
@@ -62,6 +79,9 @@
                 'Content-Length': img.length
             });
             res.end(img); 
+
+            vm.numFrames += 1;
+            vm.totalTime += (new Date()).getTime() - start;
         })
     </script>
 </body>
