@@ -16,7 +16,7 @@ def M(f_t, s_t, e_t, res=10000):
         if f_t(t) < best:
             best_t = t
             best = f_t(t)
-    return t, best
+    return best_t, best
 
 class Track:
     
